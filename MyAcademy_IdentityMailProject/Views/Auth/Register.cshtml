@@ -4,34 +4,117 @@
 }
 <h1>Kullanıcı Kaydı</h1>
 
-<form method="post">
+<style>
+    body {
+        background: linear-gradient(135deg, #f5f7fa, #e4eaf5);
+        min-height: 100vh;
+    }
 
-    <label>Ad</label>
-    <input type="text" asp-for="FirstName" class="form-control" required />
-    <br />
+    .register-card {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0,0,0,.1);
+    }
 
-    <label>Soyad</label>
-    <input type="text" asp-for="LastName" class="form-control" required />
-    <br />
+    .register-title {
+        font-weight: 700;
+        color: #212529;
+    }
 
-    <label>Kullanıcı Adı</label>
-    <input type="text" asp-for="UserName" class="form-control" required />
-    <br />
+    .form-control {
+        border-radius: 12px;
+        padding: 12px 15px;
+        transition: .3s;
+    }
 
-    <label>Email</label>
-    <input type="email" asp-for="Email" class="form-control" required />
-    <br />
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 .2rem rgba(13,110,253,.15);
+    }
 
-    <label>Şifre</label>
-    <input type="password" asp-for="Password" class="form-control" required />
-    <br />
+    .btn-register {
+        border-radius: 12px;
+        padding: 12px;
+        font-size: 17px;
+        font-weight: 600;
+        transition: .3s;
+    }
 
-    <label>Şifre Tekrarı</label>
-    <input type="password" asp-for="ConfirmPassword" class="form-control" required />
-    <br />
+    .btn-register:hover {
+        transform: translateY(-2px);
+    }
 
-    <span class="text-danger">@Html.ValidationSummary()</span>
+    .card-header {
+        background: transparent;
+        border: none;
+        text-align: center;
+        padding-top: 35px;
+    }
+</style>
 
-    <button class="btn btn-outline-dark">Kayıt Ol</button>
+<div class="container py-5">
+    <div class="row justify-content-center align-items-center" style="min-height:80vh;">
 
-</form>
+        <div class="col-lg-5 col-md-7">
+
+            <div class="card register-card">
+
+                <div class="card-header">
+                    <h2 class="register-title">Kayıt Ol</h2>
+                    <p class="text-muted">
+                        Hesabınızı oluşturmak için bilgilerinizi girin.
+                    </p>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <form method="post">
+
+                        <div class="mb-3">
+                            <label asp-for="FirstName" class="form-label">Ad</label>
+                            <input asp-for="FirstName" class="form-control" placeholder="Adınız" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label">Soyad</label>
+                            <input asp-for="LastName" class="form-control" placeholder="Soyadınız" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="UserName" class="form-label">Kullanıcı Adı</label>
+                            <input asp-for="UserName" class="form-control" placeholder="Kullanıcı adınız" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">E-Posta</label>
+                            <input asp-for="Email" class="form-control" placeholder="mail@example.com" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Şifre</label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="********" />
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="ConfirmPassword" class="form-label">Şifre Tekrar</label>
+                            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="********" />
+                        </div>
+
+                        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-register">
+                                Kayıt Ol
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
