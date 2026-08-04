@@ -2,93 +2,96 @@
 
 # 📧 IdentityMail
 
-### Modern Mail Management System built with ASP.NET Core MVC & Identity
+### ASP.NET Core MVC ve Identity ile Geliştirilmiş Modern Mail Yönetim Sistemi
 
-A secure, modern and role-based mail management application developed with **ASP.NET Core MVC**, **Entity Framework Core** and **ASP.NET Core Identity**.
+ASP.NET Core MVC, Entity Framework Core ve ASP.NET Core Identity teknolojileri kullanılarak geliştirilmiş, rol tabanlı yetkilendirme ve modern kullanıcı arayüzüne sahip mail yönetim sistemi.
 
 ![.NET](https://img.shields.io/badge/.NET-9.0-512BD4?style=for-the-badge&logo=dotnet)
 ![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-MVC-512BD4?style=for-the-badge)
 ![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoftsqlserver)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?style=for-the-badge&logo=bootstrap)
-![Identity](https://img.shields.io/badge/Identity-Authentication-blue?style=for-the-badge)
+![Identity](https://img.shields.io/badge/ASP.NET%20Identity-Authentication-blue?style=for-the-badge)
 
 </div>
 
 ---
 
-# ✨ Features
+# 🚀 Proje Hakkında
 
-## 👤 Authentication
+IdentityMail, kullanıcıların güvenli bir şekilde mesajlaşmasını sağlayan, rol tabanlı yetkilendirme yapısına sahip modern bir mail yönetim sistemidir.
 
-- User Registration
-- User Login
-- Secure Password Hashing
+Proje kapsamında kullanıcılar mesaj gönderebilir, gelen ve gönderilen kutularını yönetebilir, mesajlarını kategorilere ayırabilir ve gelişmiş filtreleme özelliklerini kullanabilir. Admin kullanıcıları ise sistem genelindeki kullanıcıları ve istatistikleri yönetebilir.
+
+---
+
+# ✨ Özellikler
+
+## 👤 Kullanıcı İşlemleri
+
+- Üye Ol
+- Giriş Yap
+- Güvenli Kimlik Doğrulama
 - ASP.NET Core Identity
-- Role-Based Authorization
-- Admin / User Roles
+- Profil Güncelleme
+- Şifre Değiştirme
+- Profil Fotoğrafı Güncelleme
 
 ---
 
-## 📨 Mail System
+## 📨 Mail Sistemi
 
-- Send Mail
-- Inbox
-- Sent Messages
-- Mail Detail
-- Read / Unread Status
-- Starred Messages
-- Trash System
-- Restore Deleted Messages
-
----
-
-## 🏷 Categories
-
-- Mail Categories
-- Category Filtering
-- Category Management
+- Mesaj Gönderme
+- Gelen Kutusu
+- Gönderilen Kutusu
+- Mesaj Detay Sayfası
+- Okundu / Okunmadı Durumu
+- Yıldızlı Mesajlar
+- Çöp Kutusu
+- Mesajı Geri Yükleme
 
 ---
 
-## 🔎 Filtering & Sorting
+## 🏷️ Kategori Sistemi
 
-- Read Messages
-- Unread Messages
-- Starred Messages
+- Mesaj Kategorileri
+- Kategoriye Göre Filtreleme
+- Kategori Yönetimi
 
-Sorting
+---
 
-- Newest First
-- Oldest First
+## 🔍 Filtreleme ve Sıralama
+
+### Filtreleme
+
+- Okunan Mesajlar
+- Okunmayan Mesajlar
+- Yıldızlı Mesajlar
+- Kategoriye Göre Filtreleme
+
+### Sıralama
+
+- En Yeni
+- En Eski
 - A-Z
 - Z-A
 
 ---
 
-## 👤 Profile
-
-- Profile Management
-- Update Profile Information
-- Change Password
-- Profile Image
-
----
-
-## 🛡 Admin Panel
+## 🛡️ Admin Paneli
 
 - Dashboard
-- User Management
-- Role Management
-- Mail Statistics
-- Total Users
-- Total Messages
-- Today's Messages
-- Unread Messages
-- Trash Statistics
+- Kullanıcı Yönetimi
+- Rol Yönetimi
+- Admin / User Yetkilendirmesi
+- Toplam Kullanıcı Sayısı
+- Toplam Mesaj Sayısı
+- Bugün Gönderilen Mesajlar
+- Okunmamış Mesaj Sayısı
+- Çöp Kutusundaki Mesaj Sayısı
 
 ---
 
-# 🛠 Technologies
+# 🛠️ Kullanılan Teknolojiler
 
 - ASP.NET Core MVC
 - ASP.NET Core Identity
@@ -103,19 +106,19 @@ Sorting
 
 ---
 
-# 📊 Database
+# 🗄️ Veritabanı
 
-- ASP.NET Identity
+- SQL Server
 - Entity Framework Core
 - Code First
-- SQL Server
 - Migration
+- ASP.NET Identity
 
 ---
 
-# 🚀 Project Structure
+# 📂 Proje Yapısı
 
-```
+```text
 IdentityMail
 │
 ├── Areas
@@ -123,87 +126,80 @@ IdentityMail
 │
 ├── Controllers
 │
-├── Entities
+├── Context
 │
 ├── DTOs
 │
+├── Entities
+│
+├── Migrations
+│
 ├── Views
 │
-├── Context
-│
-└── Migrations
+└── wwwroot
 ```
 
 ---
 
-# 📸 Screenshots
+# 📸 Ekran Görüntüleri
 
-> Add project screenshots here.
+Projeye ait ekran görüntülerini buraya ekleyebilirsiniz.
 
-```
-Dashboard
-
-Inbox
-
-Send Mail
-
-User Management
-
-Profile
-
-Admin Panel
-```
+- Giriş Sayfası
+- Kayıt Ol Sayfası
+- Gelen Kutusu
+- Mesaj Gönderme
+- Profil Sayfası
+- Admin Dashboard
+- Kullanıcı Yönetimi
 
 ---
 
-# 🚀 Installation
+# ⚙️ Kurulum
+
+Projeyi klonlayın.
 
 ```bash
-git clone https://github.com/USERNAME/IdentityMail.git
+git clone https://github.com/kullaniciadi/IdentityMail.git
 ```
 
-Update your connection string.
+Veritabanı bağlantısını düzenleyin.
 
-```
+```json
 appsettings.json
 ```
 
-Apply migrations
+Migration'ları uygulayın.
 
 ```bash
 Update-Database
 ```
 
-Run the project.
+Projeyi çalıştırın.
 
 ---
 
-# 📌 Roadmap
+# 🎯 Gelecekte Eklenebilecek Özellikler
 
-- Message Reporting
-- Advanced Analytics
-- Charts
-- Notification System
-- Real-Time Messaging (SignalR)
-- Two Factor Authentication
-- Dark Mode
-
----
-
-# 👨‍💻 Developer
-
-Developed by **Çağan Derindere**
-
-GitHub
-
-https://github.com/caganderindere
-
-LinkedIn
-
-https://www.linkedin.com/in/cagandrd/
+- Gerçek zamanlı mesajlaşma (SignalR)
+- Bildirim sistemi
+- Mesaj raporlama
+- Grafik destekli istatistikler
+- İki Faktörlü Kimlik Doğrulama (2FA)
+- Karanlık Tema
+- Gelişmiş Admin Raporları
 
 ---
 
-# ⭐ Support
+# 👨‍💻 Geliştirici
 
-If you like this project, don't forget to leave a ⭐ on the repository.
+**Çağan Derindere**
+
+- GitHub: https://github.com/caganderindere
+- LinkedIn: https://www.linkedin.com/in/cagandrd/
+
+---
+
+# ⭐ Destek
+
+Projeyi beğendiyseniz repoya ⭐ vermeyi unutmayın.
