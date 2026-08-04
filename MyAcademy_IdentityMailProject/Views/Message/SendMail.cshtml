@@ -312,6 +312,47 @@
                     </div>
                 </div>
 
+                <!-- katogori Gövdesi -->
+                <div class="mb-4">
+
+                    <label asp-for="CategoryId" class="form-label-premium">
+                        Kategori
+                    </label>
+
+                    <select asp-for="CategoryId" class="form-select">
+
+                        <option value="">📂 Kategori Seçiniz</option>
+
+                        @foreach (var item in ViewBag.Categories)
+                        {
+                            <option value="@item.Id">
+                                @item.Name
+                            </option>
+                        }
+
+                    </select>
+
+                </div>
+
+                <style>
+                    .form-select {
+                        height: 52px;
+                        border-radius: 16px;
+                        border: 1px solid #dbe4f0;
+                        background: rgba(255,255,255,.75);
+                        color: #0f172a;
+                        font-size: .95rem;
+                        font-weight: 500;
+                        box-shadow: none;
+                        transition: .25s;
+                    }
+
+                        .form-select:focus {
+                            border-color: #2563eb;
+                            box-shadow: 0 0 0 .2rem rgba(37,99,235,.15);
+                        }
+                </style>
+
                 <!-- Mesaj Gövdesi -->
                 <div class="mb-4">
                     <label asp-for="Body" class="form-label-premium">

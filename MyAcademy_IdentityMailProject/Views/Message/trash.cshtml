@@ -1,7 +1,7 @@
 ﻿@model List<UserMessage>
 
 @{
-    ViewData["Title"] = "Gelen Kutusu";
+    ViewData["Title"] = "Çöp Kutusu";
     var starredCount = Model.Count(m => m.IsStarred);
 }
 
@@ -491,20 +491,6 @@
         text-overflow: ellipsis;
     }
 
-    .mail-subject-pill {
-        display: inline-block;
-        font-weight: 600;
-        font-size: 0.85rem;
-        color: #1e293b;
-        background: rgba(241, 245, 249, 0.8);
-        padding: 3px 10px;
-        border-radius: 8px;
-        max-width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
     /* Read / Unread Status Badges */
     .status-badge {
         font-size: 0.72rem;
@@ -680,27 +666,9 @@
                     <div class="online-indicator"></div>
                 </div>
 
-                <div style="min-width:0; flex:1;">
-
-                    <div class="user-info-name text-truncate">
-                        @ViewBag.fullName
-                    </div>
-
-                    <span class="user-welcome-badge">
-                        Hoş Geldin
-                    </span>
-
-                    <div class="mt-2">
-                        <a asp-controller="Profile"
-                           asp-action="Index"
-                           class="btn btn-sm btn-outline-primary rounded-pill">
-
-                            <i class="bi bi-person-gear-fill me-1"></i>
-                            Düzenle
-
-                        </a>
-                    </div>
-
+                <div style="min-width: 0;">
+                    <div class="user-info-name text-truncate">@ViewBag.fullName</div>
+                    <span class="user-welcome-badge">Hoş Geldin</span>
                 </div>
             </div>
 
@@ -719,7 +687,7 @@
             </div>
 
             <!-- Yeni Mesaj Butonu -->
-            <a href="/Message/SendMail" class="btn-compose-premium">
+            <a href="#" class="btn-compose-premium">
                 <i class="bi bi-plus-lg fs-5"></i>
                 <span>Yeni Mesaj</span>
             </a>
@@ -727,7 +695,7 @@
             <!-- Navigasyon Menüsü -->
             <ul class="mail-nav-list">
                 <li>
-                    <a asp-controller="Message" asp-action="Index" class="mail-nav-item active">
+                    <a asp-controller="Message"       asp-action="Index"  class="mail-nav-item">
                         <div>
                             <i class="bi bi-inbox-fill"></i>
                             <span>Gelen Kutusu</span>
@@ -763,7 +731,7 @@
                 <li>
                     <a asp-controller="Message"
                        asp-action="Trash"
-                       class="mail-nav-item ">
+                       class="mail-nav-item active">
                         <div>
                             <i class="bi bi-trash-fill"></i>
                             <span>Çöp Kutusu</span>
@@ -788,11 +756,10 @@
                 <div class="header-title-box">
                     <h2>
                         <i class="bi bi-send-check-fill text-primary"></i>
-                       Gelen Kutusu
+                        Çöp Kutusu
                     </h2>
-                    <p>Gelen tüm mailler burada listelenir.</p>
+                    <p>Çöp kutusuna taşınan mesajlar burada listelenir..</p>
                 </div>
-
 
                 <!-- Modern Arama Kutusu -->
                 <div class="mail-search-box">
@@ -802,180 +769,7 @@
 
                 <span class="total-count-pill">@Model.Count Mesaj</span>
             </div>
-            <style>
-                /* ========== MODERN FILTER BAR ========== */
-                .mail-filter-bar {
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    margin-bottom: 24px;
-                    flex-wrap: wrap; /* Mobilde alt satıra geçmesi için */
-                }
 
-                .mail-filter-chip {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 8px;
-                    padding: 8px 20px;
-                    border-radius: 30px;
-                    background: rgba(255, 255, 255, 0.55);
-                    border: 1px solid rgba(255, 255, 255, 0.9);
-                    color: #475569;
-                    font-weight: 600;
-                    font-size: 0.9rem;
-                    text-decoration: none;
-                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.03);
-                }
-
-                    .mail-filter-chip i {
-                        font-size: 1.05rem;
-                        transition: transform 0.3s ease;
-                    }
-
-                    /* Genel Hover Efekti */
-                    .mail-filter-chip:hover {
-                        background: #ffffff;
-                        transform: translateY(-2px);
-                        box-shadow: 0 6px 15px rgba(15, 23, 42, 0.08);
-                    }
-
-                        .mail-filter-chip:hover i {
-                            transform: scale(1.15);
-                        }
-
-                    /* Özel Renkli Hover Efektleri */
-                    .mail-filter-chip.filter-all:hover {
-                        color: #2563EB;
-                        border-color: #2563EB;
-                    }
-
-                    .mail-filter-chip.filter-all i {
-                        color: #3b82f6;
-                    }
-
-                    .mail-filter-chip.filter-read:hover {
-                        color: #10b981;
-                        border-color: #10b981;
-                    }
-
-                    .mail-filter-chip.filter-read i {
-                        color: #10b981;
-                    }
-
-                    .mail-filter-chip.filter-unread:hover {
-                        color: #f59e0b;
-                        border-color: #f59e0b;
-                    }
-
-                    .mail-filter-chip.filter-unread i {
-                        color: #f59e0b;
-                    }
-
-                    .mail-filter-chip.filter-starred:hover {
-                        color: #eab308;
-                        border-color: #eab308;
-                    }
-
-                    .mail-filter-chip.filter-starred i {
-                        color: #eab308;
-                    }
-
-                    /* Aktif (Seçili) Durum Sınıfı (İhtiyaç halinde class'a 'active' ekleyebilirsin) */
-                    .mail-filter-chip.active {
-                        background: #ffffff;
-                        color: #2563EB;
-                        border-color: #2563EB;
-                        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
-                    }
-            </style>
-
-            <div class="mail-filter-bar animate-fade-up delay-2">
-
-                <a asp-controller="Message"
-                   asp-action="Index"
-                   class="mail-filter-chip filter-all">
-                    <i class="bi bi-grid-fill"></i>
-                    Tümü
-                </a>
-
-                <a asp-controller="Message"
-                   asp-action="Index"
-                   asp-route-filter="read"
-                   class="mail-filter-chip filter-read">
-                    <i class="bi bi-check-circle-fill"></i>
-                    Okunan
-                </a>
-
-                <a asp-controller="Message"
-                   asp-action="Index"
-                   asp-route-filter="unread"
-                   class="mail-filter-chip filter-unread">
-                    <i class="bi bi-eye-slash-fill"></i>
-                    Okunmayan
-                </a>
-
-                <a asp-controller="Message"
-                   asp-action="Index"
-                   asp-route-filter="starred"
-                   class="mail-filter-chip filter-starred">
-                    <i class="bi bi-star-fill"></i>
-                    Yıldızlı
-                </a>
-                <div class="ms-auto d-flex gap-2">
-
-                    <!-- Kategori -->
-                    <form asp-controller="Message"
-                          asp-action="Index"
-                          method="get">
-
-                        <input type="hidden" name="filter" value="@Context.Request.Query["filter"]" />
-                        <input type="hidden" name="sort" value="@Context.Request.Query["sort"]" />
-
-                        <select name="categoryId"
-                                class="form-select rounded-pill"
-                                style="min-width:220px;"
-                                onchange="this.form.submit()">
-
-                            <option value="">📂 Tüm Kategoriler</option>
-
-                            @foreach (var item in ViewBag.Categories)
-                            {
-                                <option value="@item.Id"
-                                        selected="@(ViewBag.SelectedCategory != null && (int)ViewBag.SelectedCategory == item.Id)">
-                                    @item.Name
-                                </option>
-                            }
-
-                        </select>
-
-                    </form>
-
-                    <!-- Sıralama -->
-                    <form asp-controller="Message"
-                          asp-action="Index"
-                          method="get">
-
-                        <input type="hidden" name="filter" value="@Context.Request.Query["filter"]" />
-                        <input type="hidden" name="categoryId" value="@Context.Request.Query["categoryId"]" />
-
-                        <select name="sort"
-                                class="form-select rounded-pill"
-                                style="min-width:180px;"
-                                onchange="this.form.submit()">
-
-                            <option value="">↕️ Sırala</option>
-                            <option value="new">🕒 En Yeni</option>
-                            <option value="old">📜 En Eski</option>
-                            <option value="az">🔤 A-Z</option>
-                            <option value="za">🔠 Z-A</option>
-
-                        </select>
-
-                    </form>
-
-                </div>
-            </div>
             <!-- Mesaj Listesi -->
             <div class="mail-cards-list" id="mailList">
                 @if (Model.Any())
@@ -1017,21 +811,10 @@
                                     }
                                 </div>
 
-                                <div class="d-flex align-items-center gap-2 flex-wrap">
-
+                                <div>
                                     <span class="mail-subject-pill">
                                         @item.Subject
                                     </span>
-
-                                    @if (item.Category != null)
-                                    {
-                                        <span class="mail-category-badge"
-                                              style="background-color:@item.Category.Color">
-                                            <i class="bi bi-bookmark-fill"></i>
-                                            @item.Category.Name
-                                        </span>
-                                    }
-
                                 </div>
                             </div>
 
@@ -1051,11 +834,11 @@
                                 </a>
 
                                 <a asp-controller="Message"
-                                   asp-action="MoveToTrash"
+                                   asp-action="Restore"
                                    asp-route-id="@item.Id"
-                                   class="action-icon-btn danger"
-                                   title="Çöp Kutusuna Taşı">
-                                    <i class="bi bi-trash"></i>
+                                   class="action-icon-btn view"
+                                   title="Geri Yükle">
+                                    <i class="bi bi-arrow-counterclockwise"></i>
                                 </a>
                             </div>
 
