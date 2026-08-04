@@ -1,7 +1,7 @@
 ﻿@model List<UserMessage>
 
 @{
-    ViewData["Title"] = "Gelen Kutusu";
+    ViewData["Title"] = "Yıldızlı Mesaj Kutusu";
     var starredCount = Model.Count(m => m.IsStarred);
 }
 
@@ -491,29 +491,6 @@
         text-overflow: ellipsis;
     }
 
-    /* Read / Unread Status Badges */
-    .status-badge {
-        font-size: 0.72rem;
-        font-weight: 700;
-        padding: 4px 10px;
-        border-radius: 20px;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-        .status-badge.read {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: #fff;
-            box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
-        }
-
-        .status-badge.unread {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #fff;
-            box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
-        }
-
     .mail-date-stamp {
         color: var(--text-muted);
         font-size: 0.82rem;
@@ -576,7 +553,7 @@
             font-size: 3.5rem;
             display: block;
             margin-bottom: 16px;
-            color: var(--brand-5);
+            color: #f59e0b;
         }
 
     /* ========== ENTRANCE ANIMATIONS ========== */
@@ -675,27 +652,27 @@
             <!-- İstatistik Kartları Grid (Opsiyonel) -->
             <div class="stats-grid">
                 <div class="stat-card">
+                    <i class="bi bi-star-fill stat-icon" style="color: #f59e0b;"></i>
+                    <div class="stat-value">@starredCount</div>
+                    <div class="stat-label">Önemli</div>
+                </div>
+                <div class="stat-card">
                     <i class="bi bi-envelope-fill stat-icon"></i>
                     <div class="stat-value">@Model.Count</div>
                     <div class="stat-label">Toplam</div>
                 </div>
-                <div class="stat-card">
-                    <i class="bi bi-star-fill stat-icon"></i>
-                    <div class="stat-value">@starredCount</div>
-                    <div class="stat-label">Önemli</div>
-                </div>
             </div>
 
             <!-- Yeni Mesaj Butonu -->
-            <a href="#" class="btn-compose-premium">
-                <i class="bi bi-plus-lg fs-5"></i>
-                <span>Yeni Mesaj</span>
+            <a asp-controller="Message" asp-action="SendMail" class="btn-compose-premium">
+                <i class="bi bi-pencil-square fs-5"></i>
+                <span>Yeni Mail Gönder</span>
             </a>
 
             <!-- Navigasyon Menüsü -->
             <ul class="mail-nav-list">
                 <li>
-                    <a asp-controller="Message" asp-action="Index" class="mail-nav-item active">
+                    <a asp-controller="Message" asp-action="Index" class="mail-nav-item">
                         <div>
                             <i class="bi bi-inbox-fill"></i>
                             <span>Gelen Kutusu</span>
@@ -704,7 +681,7 @@
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="Message" asp-action="StarredMessages" class="mail-nav-item">
+                    <a asp-controller="Message" asp-action="StarredMessages" class="mail-nav-item active">
                         <div>
                             <i class="bi bi-star-fill"></i>
                             <span>Yıldızlı</span>
@@ -713,7 +690,9 @@
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="Message" asp-action="SentMessages" class="mail-nav-item">
+                    <a asp-controller="Message"
+                       asp-action="SentMessages"
+                       class="mail-nav-item">
                         <div>
                             <i class="bi bi-send-fill"></i>
                             <span>Gönderilenler</span>
@@ -753,10 +732,10 @@
             <div class="mail-main-header">
                 <div class="header-title-box">
                     <h2>
-                        <i class="bi bi-send-check-fill text-primary"></i>
-                       Gelen Kutusu
+                        <i class="bi bi-star-fill text-warning"></i>
+                        Yıldızlı Mesajlar
                     </h2>
-                    <p>Gelen tüm mailler burada listelenir.</p>
+                    <p>Favori olarak işaretlediğin mesajlar <strong>@ViewBag.fullName</strong></p>
                 </div>
 
                 <!-- Modern Arama Kutusu -->
@@ -774,7 +753,7 @@
                 {
                     @foreach (var item in Model)
                     {
-                        <div class="mail-card-row animate-fade-up delay-3" data-search="@($"{item.Receiver.FirstName} {item.Receiver.LastName} {item.Receiver.Email} {item.Subject}".ToLower())">
+                        <div class="mail-card-row animate-fade-up delay-3" data-search="@($"{item.Sender.FirstName} {item.Sender.LastName} {item.Sender.Email} {item.Subject}".ToLower())">
 
                             <!-- Yıldız Butonu -->
                             <button type="button"
@@ -786,27 +765,14 @@
 
                             <!-- Avatar -->
                             <div class="row-avatar">
-                                @item.Receiver.FirstName.Substring(0, 1)
+                                @item.Sender.FirstName.Substring(0, 1)
                             </div>
 
                             <!-- Mesaj Gövdesi -->
                             <div class="mail-card-body">
                                 <div class="mail-card-header-info">
-                                    <span class="sender-fullname">@item.Receiver.FirstName @item.Receiver.LastName</span>
-                                    <span class="sender-email-text">@item.Receiver.Email</span>
-
-                                    @if (item.IsRead)
-                                    {
-                                        <span class="status-badge read">
-                                            <i class="bi bi-check-circle-fill"></i> Okundu
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span class="status-badge unread">
-                                            <i class="bi bi-eye-slash-fill"></i> Okunmadı
-                                        </span>
-                                    }
+                                    <span class="sender-fullname">@item.Sender.FirstName @item.Sender.LastName</span>
+                                    <span class="sender-email-text">@item.Sender.Email</span>
                                 </div>
 
                                 <div>
@@ -842,9 +808,9 @@
                 else
                 {
                     <div class="mail-empty-state">
-                        <i class="bi bi-inbox"></i>
-                        <h5>Henüz mesaj bulunmuyor.</h5>
-                        <p class="text-muted">Mesajlar burada listelenecektir.</p>
+                        <i class="bi bi-star"></i>
+                        <h5>Henüz yıldızlı mesaj bulunmuyor.</h5>
+                        <p class="text-muted">Favorilere eklediğiniz mesajlar burada listelenecektir.</p>
                     </div>
                 }
             </div>

@@ -1,7 +1,7 @@
 ﻿@model List<UserMessage>
 
 @{
-    ViewData["Title"] = "Gelen Kutusu";
+    ViewData["Title"] = "Gönderilenler";
     var starredCount = Model.Count(m => m.IsStarred);
 }
 
@@ -137,6 +137,13 @@
         font-size: 1rem;
         color: var(--text-main);
         line-height: 1.2;
+    }
+
+    .user-info-email {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-top: 2px;
+        word-break: break-all;
     }
 
     .user-welcome-badge {
@@ -558,6 +565,13 @@
             box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
         }
 
+        .action-icon-btn.reply:hover {
+            background: #8b5cf6;
+            border-color: #8b5cf6;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+        }
+
         .action-icon-btn.danger:hover {
             background: #ef4444;
             border-color: #ef4444;
@@ -668,21 +682,32 @@
 
                 <div style="min-width: 0;">
                     <div class="user-info-name text-truncate">@ViewBag.fullName</div>
+                    <div class="user-info-email text-truncate">@ViewBag.userEmail</div>
                     <span class="user-welcome-badge">Hoş Geldin</span>
                 </div>
             </div>
 
-            <!-- İstatistik Kartları Grid (Opsiyonel) -->
+            <!-- İstatistik Kartları Grid -->
             <div class="stats-grid">
                 <div class="stat-card">
+                    <i class="bi bi-people-fill stat-icon"></i>
+                    <div class="stat-value">@(ViewBag.TotalUsers ?? "0")</div>
+                    <div class="stat-label">Kullanıcı</div>
+                </div>
+                <div class="stat-card">
                     <i class="bi bi-envelope-fill stat-icon"></i>
-                    <div class="stat-value">@Model.Count</div>
+                    <div class="stat-value">@(ViewBag.TotalMessages ?? Model.Count.ToString())</div>
                     <div class="stat-label">Toplam</div>
                 </div>
                 <div class="stat-card">
-                    <i class="bi bi-star-fill stat-icon"></i>
-                    <div class="stat-value">@starredCount</div>
-                    <div class="stat-label">Önemli</div>
+                    <i class="bi bi-envelope-open-fill stat-icon"></i>
+                    <div class="stat-value">@(ViewBag.UnreadMessages ?? "0")</div>
+                    <div class="stat-label">Okunmamış</div>
+                </div>
+                <div class="stat-card">
+                    <i class="bi bi-trash-fill stat-icon"></i>
+                    <div class="stat-value">@(ViewBag.TrashMessages ?? "0")</div>
+                    <div class="stat-label">Çöp Kutusu</div>
                 </div>
             </div>
 
@@ -695,7 +720,7 @@
             <!-- Navigasyon Menüsü -->
             <ul class="mail-nav-list">
                 <li>
-                    <a asp-controller="Message" asp-action="Index" class="mail-nav-item active">
+                    <a asp-controller="Message" asp-action="Index" class="mail-nav-item">
                         <div>
                             <i class="bi bi-inbox-fill"></i>
                             <span>Gelen Kutusu</span>
@@ -713,11 +738,12 @@
                     </a>
                 </li>
                 <li>
-                    <a asp-controller="Message" asp-action="SentMessages" class="mail-nav-item">
+                    <a asp-controller="Message" asp-action="SentMessages" class="mail-nav-item active">
                         <div>
                             <i class="bi bi-send-fill"></i>
                             <span>Gönderilenler</span>
                         </div>
+                        <span class="mail-nav-badge">@Model.Count</span>
                     </a>
                 </li>
                 <li>
@@ -733,6 +759,14 @@
                         <div>
                             <i class="bi bi-trash-fill"></i>
                             <span>Çöp Kutusu</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="mail-nav-item">
+                        <div>
+                            <i class="bi bi-tags-fill"></i>
+                            <span>Kategoriler</span>
                         </div>
                     </a>
                 </li>
@@ -754,9 +788,9 @@
                 <div class="header-title-box">
                     <h2>
                         <i class="bi bi-send-check-fill text-primary"></i>
-                       Gelen Kutusu
+                        Gönderilen Mesajlar
                     </h2>
-                    <p>Gelen tüm mailler burada listelenir.</p>
+                    <p>Son gönderdiğin tüm mailleri buradan yönetebilirsin.</p>
                 </div>
 
                 <!-- Modern Arama Kutusu -->
@@ -831,6 +865,10 @@
                                     <i class="bi bi-envelope-open"></i>
                                 </a>
 
+                                <a href="#" class="action-icon-btn reply" title="Yanıtla">
+                                    <i class="bi bi-reply-fill"></i>
+                                </a>
+
                                 <a href="#" class="action-icon-btn danger" title="Sil">
                                     <i class="bi bi-trash"></i>
                                 </a>
@@ -844,7 +882,7 @@
                     <div class="mail-empty-state">
                         <i class="bi bi-inbox"></i>
                         <h5>Henüz mesaj bulunmuyor.</h5>
-                        <p class="text-muted">Mesajlar burada listelenecektir.</p>
+                        <p class="text-muted">Gönderdiğiniz mesajlar burada listelenecektir.</p>
                     </div>
                 }
             </div>

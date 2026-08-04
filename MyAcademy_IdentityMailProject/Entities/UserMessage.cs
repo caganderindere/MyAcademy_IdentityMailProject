@@ -22,5 +22,7 @@
 
         public int ReceiverId { get; set; }
 
+        public bool IsStarred { get; set; }
+
     }
 }

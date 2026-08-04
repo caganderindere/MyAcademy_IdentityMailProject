@@ -1,0 +1,170 @@
+﻿@model AppUser
+
+@{
+    ViewData["Title"] = "Profilim";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-header bg-primary text-white py-3">
+                    <h3 class="mb-0">
+                        <i class="bi bi-person-circle"></i>
+                         @Model.FirstName @Model.LastName
+                    </h3>
+                    <a asp-controller="Profile"
+                       asp-action="Index"
+                       class="btn btn-outline-light rounded-pill px-4">
+
+                        <i class="bi bi-arrow-left-circle me-2"></i>
+
+                        Geri Dön
+
+                    </a>
+                </div>
+
+                <div class="card-body p-5">
+
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["Success"]
+                        </div>
+                    }
+
+                    <form asp-action="ProfileUpdate" method="post">
+
+                        <div class="text-center mb-4">
+
+                            @if (!string.IsNullOrEmpty(Model.ProfileImageUrl))
+                            {
+                                <img src="@Model.ProfileImageUrl"
+                                     class="rounded-circle shadow"
+                                     width="140"
+                                     height="140"
+                                     style="object-fit:cover;" />
+                            }
+                            else
+                            {
+                                <img src="https://ui-avatars.com/api/?name=@Model.FirstName+@Model.LastName&size=200"
+                                     class="rounded-circle shadow" />
+                            }
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+                                Profil Fotoğrafı URL
+                            </label>
+
+                            <input asp-for="ProfileImageUrl"
+                                   class="form-control" />
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Ad
+                                </label>
+
+                                <input asp-for="FirstName"
+                                       class="form-control" />
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Soyad
+                                </label>
+
+                                <input asp-for="LastName"
+                                       class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-semibold">
+                                Telefon
+                            </label>
+
+                            <input asp-for="PhoneNumber"
+                                   class="form-control" />
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label fw-semibold">
+                                Email
+                            </label>
+
+                            <input asp-for="Email"
+                                   class="form-control"
+                                   readonly />
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+                                Kullanıcı Adı
+                            </label>
+
+                            <input asp-for="UserName"
+                                   class="form-control"
+                                   readonly />
+
+                        </div>
+
+                        <div class="d-grid">
+
+                            <button class="btn btn-primary btn-lg">
+
+                                <i class="bi bi-check-circle"></i>
+
+                                Profili Güncelle
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                    <hr class="my-5" />
+
+                    <div class="text-center">
+
+                        <a asp-controller="Security"
+                           asp-action="ChangePassword"
+                           class="btn btn-outline-danger">
+
+                            <i class="bi bi-shield-lock"></i>
+
+                            Şifre Değiştir
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
