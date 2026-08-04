@@ -141,17 +141,8 @@ IdentityMail
 
 ---
 
-# 📸 Ekran Görüntüleri
-
-Projeye ait ekran görüntülerini buraya ekleyebilirsiniz.
-
-- Giriş Sayfası
-- Kayıt Ol Sayfası
-- Gelen Kutusu
-- Mesaj Gönderme
-- Profil Sayfası
-- Admin Dashboard
-- Kullanıcı Yönetimi
+# 📸 
+<a href="https://resmim.net/"><img src="https://resmim.net/cdn/2026/08/04/EYy6Ai.png" alt="resim yükle" border="0" /></a>
 
 ---
 
